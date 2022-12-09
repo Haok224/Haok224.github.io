@@ -2,23 +2,37 @@
 <html>
 
 <head>
-  <title>Haok's Site</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link href="https://cdn.staticfile.org/twitter-bootstrap/5.1.1/css/bootstrap.min.css" rel="stylesheet" />
-  <link href="index.css" rel="stylesheet" />
-  <script src="https://cdn.staticfile.org/twitter-bootstrap/5.1.1/js/bootstrap.bundle.min.js"></script>
-  <script src="main.js"></script>
+    <title>Haok's Site</title>
+
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="index.css" rel="stylesheet"/>
+    <link href="" rel="icon"/>
+    <script src="bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script>
+
+    window.onload = function(){
+      i = document.getElementById("amount");
+      x = i.innerHTML;
+      x += 1;
+      i.innerHTML = x;
+    }
+
+    </script>
 </head>
 
 <body>
-  <div class="container">
+<div class="container">
     <h1>欢迎来到这里！</h1>
+    <p>这里是由haok224搭建的一个简易站点,它已经被访问了<i id="amount">0</i>次。</p>
     <p>本人的作品:</p>
-    <div class="btn-grounp">
-      <button type="button" class="btn btn-primary" onclick="window.open('projects/maker.html')">资源包制作器</button>
+    <div class="btn-group">
+        <button type="button" class="btn btn-primary" onclick="window.open('projects/maker.html')">资源包制作器</button>
+        <button type="button" class="btn btn-primary" onclick="window.open('projects/game.html')">BraveSteveGame
+        </button>
     </div>
-  </div>
+</div>
 
 </body>
 
