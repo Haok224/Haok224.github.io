@@ -8,39 +8,44 @@
     <script src="home.js"></script>
 </head>
 <body>
-<!--顶部-->
-<div align="center" style="top">
-    <img decoding="async" src="icon.png" class="rounded" alt="icon" />
-    <table>
-        <tbody>
-        <tr>
-            <td>
-                <select class="form-select" id="select">
-                    <option>baidu</option>
-                    <option>mcbbs</option>
-                    <option>minecraft_wiki</option>
-                    <option>bilibili</option>
-                </select>
-            </td>
-            <td><input type="text" class="form-control" placeholder="搜索 ..." id="text"/></td>
-            <td>
-                <button type="button" class="btn btn-primary" onclick="search();">搜索</button>
-            </td>
-        </tr>
-        </tbody>
-        <colgroup>
-            <col>
-            <col>
-        </colgroup>
-    </table>
-</div>
-<!--中间-->
-<div align="center" style="center">
+<div class="container">
+    <!--顶部-->
+    <div align="center" style="top">
+        <img decoding="async" src="icon.png" class="rounded" alt="icon" />
+        <table>
+            <tbody>
+            <tr>
+                <td>
+                    <select class="form-select" id="select">
+                        <option>baidu</option>
+                        <option>mcbbs</option>
+                        <option>minecraft_wiki</option>
+                        <option>bilibili</option>
+                    </select>
+                </td>
+                <td><input type="text" class="form-control" placeholder="搜索 ..." id="text"/></td>
+                <td>
+                    <button type="button" class="btn btn-primary" onclick="search();">搜索</button>
+                </td>
+            </tr>
+            </tbody>
+            <colgroup>
+                <col>
+                <col>
+            </colgroup>
+        </table>
+    </div>
+    <!--中间-->
+    <div align="center" style="center">
+        <div class="btn-group">
+            <a href="https://www.jd.com"><button class="btn btn-primary" type="button">京东</button></a>
+            <a href="https://www.zhihu.com"><button class="btn btn-primary" type="button">知乎</button></a>
+        </div>
+    </div>
+    <!--底部-->
+    <div style="bottom">
 
-</div>
-<!--底部-->
-<div style="bottom">
-
+    </div>
 </div>
 </body>
 </html>
