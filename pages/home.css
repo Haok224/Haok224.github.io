@@ -4,7 +4,7 @@
 }
 top{
     background-color: rgb(43, 35, 35);
-    text-align: center;
+    position: relative;
 }
 center{
     background-color: #211c1c;
