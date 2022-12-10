@@ -1,0 +1,17 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+top{
+    background-color: rgb(43, 35, 35);
+    text-align: center;
+}
+center{
+    background-color: #211c1c;
+    text-align: center;
+}
+bottom{
+    background-color: black;
+    text-align: center;
+    text-decoration: none;
+}
