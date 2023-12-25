@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Flappy Bird - 低语</title>
+    <style>
+        html,
+        body {
+            margin: 0;
+            touch-action: manipulation
+        }
+
+        svg {
+            background-image: url('lty.png');
+            background-position: center;
+            background-size: cover;
+            border: 0;
+            margin: 0;
+            display: block;
+            width: 100vw;
+            height: 100vh;
+        }
+    </style>
+</head>
+
+<body>
+    <svg id="gameSvg" width="800" height="600"></svg>
+    <script>
+        // 获取 SVG 元素
+        var svg = document.getElementById('gameSvg')
+
+        // 游戏设置
+        var gravity = 0.25 // 重力
+        var lift = -6 // 向上弹的力度
+        var birdSpeed = 0 // 初始速度
+        var score = 0 // 得分
+        var gameRunning = true // 游戏状态
+
+        // 小鸟设置
+        var bird = {
+            x: 150,
+            y: window.innerHeight / 2,
+            size: 40, // 方块大小
+        }
+        var birdImage = document.createElementNS('http://www.w3.org/2000/svg', 'image')
+        birdImage.setAttributeNS(null, 'href', 'bird.gif')
+        birdImage.setAttributeNS(null, 'width', bird.size)
+        birdImage.setAttributeNS(null, 'height', bird.size)
+        svg.appendChild(birdImage)
+
+        // 水管设置
+        var pipes = []
+        var pipeWidth = 60
+        var gap = 100 // 水管间隙
+        var pipeInterval = 2000 // 水管间隔时间
+        var lastPipeTime = 0 // 上一次生成水管的时间
+
+        // 绘制小鸟
+        function drawBird() {
+            birdImage.setAttributeNS(null, 'x', bird.x)
+            birdImage.setAttributeNS(null, 'y', bird.y)
+        }
+
+        // 更新小鸟位置
+        function updateBird() {
+            birdSpeed += gravity
+            bird.y += birdSpeed
+
+            if (bird.y + bird.size > window.innerHeight || bird.y < 0) {
+                gameOver()
+            }
+        }
+
+        // 绘制水管
+        function drawPipes() {
+            pipes.forEach(function (pipe, i) {
+                if (!pipe.element) {
+                    pipe.element = {
+                        top: document.createElementNS('http://www.w3.org/2000/svg', 'rect'),
+                        bottom: document.createElementNS('http://www.w3.org/2000/svg', 'rect'),
+                    }
+                    pipe.element.top.setAttributeNS(null, 'width', pipeWidth)
+                    pipe.element.bottom.setAttributeNS(null, 'width', pipeWidth)
+                    pipe.element.top.setAttributeNS(null, 'height', pipe.top)
+                    pipe.element.bottom.setAttributeNS(null, 'height', pipe.bottom)
+                    pipe.element.top.setAttributeNS(null, 'fill', ("#" + Math.floor(Math.random() * 0xffffff).toString(16).padEnd(6, "0")));
+                    pipe.element.bottom.setAttributeNS(null, 'fill', "#" + Math.floor(Math.random() * 0xffffff).toString(16).padEnd(6, "0"));
+                    svg.appendChild(pipe.element.top)
+                    svg.appendChild(pipe.element.bottom)
+                }
+                pipe.element.top.setAttributeNS(null, 'x', pipe.x)
+                pipe.element.top.setAttributeNS(null, 'y', 0)
+                pipe.element.bottom.setAttributeNS(null, 'x', pipe.x)
+                pipe.element.bottom.setAttributeNS(null, 'y', window.innerHeight - pipe.bottom)
+            })
+        }
+
+        // 更新水管位置
+        function updatePipes() {
+            if (Date.now() - lastPipeTime > pipeInterval) {
+                var top = Math.random() * (window.innerHeight - gap)
+                var bottom = window.innerHeight - top - gap
+                pipes.push({ x: window.innerWidth, top: top, bottom: bottom })
+                lastPipeTime = Date.now()
+            }
+
+            pipes.forEach(function (pipe, i) {
+                pipe.x -= 3 // 水管移动速度
+                if (pipe.x + pipeWidth < 0) {
+                    pipes.splice(i, 1)
+                    score++
+                }
+                if (
+                    bird.x < pipe.x + pipeWidth &&
+                    bird.x + bird.size > pipe.x &&
+                    (bird.y < pipe.top || bird.y + bird.size > window.innerHeight - pipe.bottom)
+                ) {
+                    gameOver()
+                }
+            })
+        }
+
+        // 游戏结束
+        function gameOver() {
+            gameRunning = false
+            window.alert("为财富和荣誉而战，孩子。\n" + 'Score: ' + score);
+            location.reload();
+        }
+
+        // 游戏循环
+        function gameLoop() {
+            if (!gameRunning) return
+
+            drawBird()
+            updateBird()
+
+            drawPipes()
+            updatePipes()
+
+            requestAnimationFrame(gameLoop)
+        }
+
+        // 键盘事件
+        document.addEventListener('keydown', function (e) {
+            if (e.code === 'Space') {
+                birdSpeed = lift
+            }
+        })
+        // 触屏事件
+        svg.addEventListener('touchstart', function (e) {
+            birdSpeed = lift
+        })
+
+        // 开始游戏
+        gameLoop()
+    </script>
+</body>
+
+</html>
