@@ -3,7 +3,47 @@
 
 <head>
     <meta charset="UTF-8" />
-    <title>Flappy Bird - 低语</title>
+    <script>
+        function random(max) {
+            return Math.floor(Math.random() * max);
+        }
+
+        function get_image() {
+            var id = random(9);
+            switch (id) {
+                case 1:
+                    return 'https://pic.imgdb.cn/item/658a35e6c458853aefcf3dc7.jpg';
+                case 2:
+                    return 'https://pic.imgdb.cn/item/658a35e6c458853aefcf3d7f.webp';
+                case 3:
+                    return 'https://pic.imgdb.cn/item/658a35d7c458853aefcf0037.jpg';
+                case 4:
+                    return 'https://pic.imgdb.cn/item/658a35d6c458853aefcefe63.jpg';
+                case 5:
+                    return 'https://pic.imgdb.cn/item/658a35d6c458853aefcefe10.jpg';
+                case 6:
+                    return 'https://pic.imgdb.cn/item/658a35d6c458853aefcefd3b.png';
+                case 7:
+                    return 'https://pic.imgdb.cn/item/658a35b0c458853aefce66f3.png';
+                case 8:
+                    return 'https://pic.imgdb.cn/item/658a377cc458853aefd5d514.png';
+            }
+            return 'https://pic.imgdb.cn/item/658a35e6c458853aefcf3dc7.jpg';
+        }
+
+    </script>
+    <script>
+        window.onload = function () {
+            var img = get_image();
+            var body = document.querySelector('body');
+            body.style.background = 'url("' + img + '")';
+            body.style.backgroundSize = 'cover';
+            body.style.backgroundRepeat = 'no-repeat';
+            body.style.backgroundPosition = 'center center';
+
+        }
+    </script>
+    <title>Flappy Bird - common</title>
     <style>
         html,
         body {
@@ -12,9 +52,10 @@
         }
 
         svg {
-            background-image: url('https://s11.ax1x.com/2023/12/25/piHIfdf.png');
-            background-position: center;
+            /* background-image: url(); */
             background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center center;
             border: 0;
             margin: 0;
             display: block;
@@ -52,7 +93,7 @@
         // 水管设置
         var pipes = []
         var pipeWidth = 60
-        var gap = 100 // 水管间隙
+        var gap = 270 // 水管间隙
         var pipeInterval = 2000 // 水管间隔时间
         var lastPipeTime = 0 // 上一次生成水管的时间
 
@@ -106,7 +147,7 @@
             }
 
             pipes.forEach(function (pipe, i) {
-                pipe.x -= 3 // 水管移动速度
+                pipe.x -=10 // 水管移动速度
                 if (pipe.x + pipeWidth < 0) {
                     pipes.splice(i, 1)
                     score++
@@ -124,7 +165,7 @@
         // 游戏结束
         function gameOver() {
             gameRunning = false
-            window.alert("为财富和荣誉而战，孩子。\n" + 'Score: ' + score);
+            window.alert("乐色一个，弱智版都能die\n" + 'Score: ' + score);
             location.reload();
         }
 
